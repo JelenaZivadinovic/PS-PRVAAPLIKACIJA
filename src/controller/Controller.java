@@ -4,6 +4,7 @@
  */
 package controller;
 
+import baza.DBBroker;
 import java.util.ArrayList;
 import java.util.List;
 import model.Autor;
@@ -15,6 +16,7 @@ import model.Zanr;
  * @author Jelena
  */
 public class Controller {
+    private DBBroker dbb;
     //povezuje model i formu
     private List<Knjiga> listaKnjiga=new ArrayList<>();
     private List<Autor> listaAutora= new ArrayList<>();
@@ -32,6 +34,9 @@ public class Controller {
     
     //inicijalizacija listi
     private Controller() {
+        dbb=new DBBroker();
+        /*STARO-ako dodje da napravimo nekoliko autora i knjiga u lokalnoj memoriji onda to radimo ovako
+        u privatnom kontruktoru kontorlera
         //napravimo listu autor i dodamo parametrizovan konstruktor
         Autor autor1=new Autor("Ivo","Anderic",1892,"Bigrafija autora Ive Andrica bla bla");
         Autor autor2=new Autor("Danilo","Kis",1935,"Bigrafija autora Danila Kisa bla bla");
@@ -48,7 +53,7 @@ public class Controller {
         
         listaAutora.add(autor1);
         listaAutora.add(autor2);
-        listaAutora.add(autor3);
+        listaAutora.add(autor3);*/
         
         
     }
@@ -69,13 +74,27 @@ public class Controller {
         this.listaAutora = listaAutora;
     }
     //korisnik je kliknuo dugme obrisi,forma je rekla kontroleru da obrise i onda je kontorler brise
-    public void obrisiKnjigu(int selektovaniRed) {
-       listaKnjiga.remove(selektovaniRed);
+    public void obrisiKnjigu(int id) {
+       dbb.obrisiKnjigu(id);
+       //listaKnjiga.remove(selektovaniRed);
     }
 
     public void dodajKnjigu(Knjiga novaKnjiga) {
-        listaKnjiga.add(novaKnjiga);
+        dbb.dodajKnjigu(novaKnjiga);
+        //listaKnjiga.add(novaKnjiga);
        
+    }
+    //saljemo ovo dbbrokeru da on odradi uz pomoc konekcije i da nam vrati rezultat koji cemo prikazati
+    public List<Knjiga> ucitajListuKnjigaIzBaze() {
+        return dbb.ucitajListuKnjigaIzBaze();
+    }
+
+    public List<Autor> ucitajListuAutoraIzBaze() {
+        return dbb.ucitajListuAutoraIzBaze();
+    }
+
+    public void azurirajKnjigu(Knjiga knjigaZaIzmenu) {
+        dbb.azurirajKnjigu(knjigaZaIzmenu);
     }
     
 }

@@ -9,7 +9,8 @@ package model;
  * @author Jelena
  */
 public class Knjiga {
-    private String naslov;
+    private int id;
+    private String naslovKnjige;
     private Autor autor;//cuvanje objekta
     private String ISBN;
     private int godinaIzdanja;
@@ -19,21 +20,39 @@ public class Knjiga {
     }
 
     public Knjiga(String naslov, Autor autor, String ISBN, int godinaIzdanja, Zanr zanr) {
-        this.naslov = naslov;
+        this.naslovKnjige = naslov;
         this.autor = autor;
         this.ISBN = ISBN;
         this.godinaIzdanja = godinaIzdanja;
         this.zanr = zanr;
     }
+
+    public Knjiga(int id, String naslov, Autor autor, String ISBN, int godinaIzdanja, Zanr zanr) {
+        this.id = id;
+        this.naslovKnjige = naslov;
+        this.autor = autor;
+        this.ISBN = ISBN;
+        this.godinaIzdanja = godinaIzdanja;
+        this.zanr = zanr;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+    
     
     
     
     public String getNaslov() {
-        return naslov;
+        return naslovKnjige;
     }
 
     public void setNaslov(String naslov) {
-        this.naslov = naslov;
+        this.naslovKnjige = naslov;
     }
 
     public Autor getAutor() {
@@ -71,7 +90,7 @@ public class Knjiga {
 
     @Override
     public String toString() {
-        return "Knjiga{" + "naslov=" + naslov + ", autor=" + autor + ", ISBN=" + ISBN + ", godinaIzdanja=" + godinaIzdanja + '}';
+        return "Knjiga{" + "naslov=" + naslovKnjige + ", autor=" + autor + ", ISBN=" + ISBN + ", godinaIzdanja=" + godinaIzdanja + '}';
     }
     
     

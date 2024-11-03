@@ -17,7 +17,7 @@ public class ModelTabeleKnjige extends AbstractTableModel {
     //dajemo redove
     private  List<Knjiga>listaKnjiga;
     //dajemo kolone, niz stringova sa nazivima kolona
-    private final String[] kolone={"Naslov","Autor","ISBN","Gofina izdanja"};
+    private final String[] kolone={"id", "Naslov","Autor","ISBN","Godina izdanja"};
     //da bi formi prosledili nasu listu knjiga
     
    public ModelTabeleKnjige(List<Knjiga> listaKnjiga) {
@@ -42,12 +42,14 @@ public class ModelTabeleKnjige extends AbstractTableModel {
        Knjiga knjiga=listaKnjiga.get(rowIndex);
         switch (columnIndex) {
             case 0:
-                return knjiga.getNaslov();
+                return knjiga.getId();
             case 1:
-                return knjiga.getAutor().getIme()+" "+knjiga.getAutor().getPrezime();
+                return knjiga.getNaslov();
             case 2:
-                return knjiga.getISBN();
+                return knjiga.getAutor().getIme()+" "+knjiga.getAutor().getPrezime();
             case 3:
+                return knjiga.getISBN();
+            case 4:
                 return knjiga.getGodinaIzdanja();
                 
             default:
@@ -63,6 +65,15 @@ public class ModelTabeleKnjige extends AbstractTableModel {
     void osveziPodatke() {
         fireTableDataChanged();
     }
+
+    public List<Knjiga> getListaKnjiga() {
+        return listaKnjiga;
+    }
+
+    public void setListaKnjiga(List<Knjiga> listaKnjiga) {
+        this.listaKnjiga = listaKnjiga;
+    }
+    
     
     
 }
